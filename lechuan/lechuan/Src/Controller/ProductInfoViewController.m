@@ -43,6 +43,7 @@ NSString *job;
 @property (nonatomic, assign) NSString *job;
 
 @property (nonatomic, strong)UIWebView *webView;
+@property (nonatomic, strong)NSData *shareImageData;//分享图片
 
 @end
 
@@ -599,6 +600,36 @@ NSString *job;
     // Dispose of any resources that can be recreated.
 }
 
+#pragma - mark 获取分享图片
+
+- (NSData *)shareImageData
+{
+    if (!_shareImageData) {
+        NSString *path = @"";
+        
+        for (NSDictionary *imageDic in self.infoDic[@"productImages"])
+        {
+            if ([imageDic[@"type"] integerValue] == 0)// 0 分享 2 原先需要显示
+            {
+                path = imageDic[@"path"];
+            }
+        }
+        if ([TextFieldCheckAlert isStringNull:path]) {
+            path = self.infoDic[@"imagePath"];
+        }
+        //update by lcw
+        if ([TextFieldCheckAlert isStringNull:path]) {
+            path = @"";
+        }
+        NSString *url = [baseServerAddress stringByAppendingString:path];
+        
+        NSData *shareImageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+        
+        _shareImageData = shareImageData;
+    }
+    return _shareImageData;
+}
+
 #pragma mark - 分享
 - (void)shareActionType:(int)shareType
 {
@@ -649,7 +680,9 @@ NSString *job;
     
     UIImage *shareImage = [UIImage imageNamed:@"appIcon"];
     
-    [[LTools shareInstance] autoShareToSnsName:snsName shareTitle:title shareText:description shareImage:shareImage shareUrl:url presentViewController:self];
+    id shareData = self.shareImageData ? self.shareImageData : shareImage;
+    
+    [[LTools shareInstance] autoShareToSnsName:snsName shareTitle:title shareText:description shareImage:shareData shareUrl:url presentViewController:self];
 }
 
 #pragma mark Other Action
@@ -660,7 +693,30 @@ NSString *job;
     //    private Integer shareType;  //分享渠道 1-微信好友，2-QQ，3-QQ空间，4-新浪微博，5-腾讯微博，6-人人网，7-短信
     //    7、短信分享也不需要做了。
     
-    int shareType = 5;
+//    shareType
+    
+    NSString *shareTypeString = self.infoDic[@"shareType"];
+    
+    if ([shareTypeString isKindOfClass:[NSNull class]]) {
+        
+        shareTypeString = @"1";
+    }
+    
+    int shareType = 1;//默认微信好友
+
+    if ([shareTypeString isKindOfClass:[NSNumber class]]) {
+        
+        shareType = [shareTypeString intValue];
+        
+        if (shareType < 1 || shareType > 7) {
+            shareType = 1;//超出范围默认为1 微信好友
+        }
+
+    }
+    
+    //test
+    
+    shareType = 5;
     
     [self shareActionType:shareType];
     

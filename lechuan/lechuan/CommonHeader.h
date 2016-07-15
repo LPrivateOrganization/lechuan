@@ -13,6 +13,6 @@
 //正式
 #define baseServerAddress @"http://101.200.188.142"
 //测试
-//#define baseServerAddress @"http://5e64413e.ngrok.io"
+//#define baseServerAddress @"http://536fc926.ngrok.io/"
 
 #endif /* CommonHeader_h */

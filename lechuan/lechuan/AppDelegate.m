@@ -254,7 +254,7 @@
 
 - (void)didReceiveWeiboResponse:(WBBaseResponse *)response
 {
-    if ([response isKindOfClass:WBAuthorizeResponse.class])
+    if ([response isKindOfClass:WBAuthorizeResponse.class])//三方登录认证
     {
         if (response.statusCode == 0)
         {
@@ -285,8 +285,15 @@
             [alert show];
         }
     }
-    if ([response isKindOfClass:WBSendMessageToWeiboResponse.class])
+    if ([response isKindOfClass:WBSendMessageToWeiboResponse.class])//分享结果回调
     {
+        if (response.statusCode == WeiboSDKResponseStatusCodeSuccess) { // 分享成功
+            
+            [[LTools shareInstance] shareResultIsSuccess:YES];
+        }else
+        {
+            [[LTools shareInstance] shareResultIsSuccess:NO];
+        }
     }
 }
 

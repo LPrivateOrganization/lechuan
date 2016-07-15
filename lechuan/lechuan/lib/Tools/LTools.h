@@ -29,4 +29,11 @@
                   shareUrl:(NSString *)shareUrl
      presentViewController:(UIViewController *)presentViewController;
 
+/**
+ *  分享是否成功
+ *
+ *  @param success
+ */
+- (void)shareResultIsSuccess:(BOOL)success;
+
 @end

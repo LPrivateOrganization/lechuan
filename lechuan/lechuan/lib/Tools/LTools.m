@@ -28,6 +28,8 @@
     return manager;
 }
 
+
+//分享
 - (void)autoShareToSnsName:(NSString *)snsName
                 shareTitle:(NSString *)shareTitle
                  shareText:(NSString *)shareText
