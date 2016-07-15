@@ -1,0 +1,29 @@
+//
+//  PrefixHeader.pch
+//  HeNan
+//
+//  Created by Kami Mahou on 15/11/29.
+//  Copyright © 2015年 Kami Mahou. All rights reserved.
+//
+
+#ifdef __OBJC__
+
+#import "AppDelegate.h"
+#import "BaseViewController.h"
+//#import "WebViewCustom.h"
+#import "BHServiceDataCentre.h"
+#import "LoginViewController.h"
+#import "CmdConstant.h"
+#import "DefineConstant.h"
+#import "Utilities.h"
+#import "PublicDefinitions.h"
+#import "ThirdPartHead.h"
+#import "FFConfig.h"
+#import "GetStringWidthAndHeight.h"
+#import "TextFieldCheckAlert.h"
+#import "CommonHeader.h"
+//拓展
+#import "NSDictionary+Additions.h"
+#import "LTools.h"
+
+#endif
