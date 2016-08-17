@@ -64,11 +64,12 @@
         
         //分享类别
         NSArray *textArray = @[@"微信好友", @"人人网", @"新浪微博", @"QQ好友",@"QQ空间",@"短信"];
-        for (int i = 0; i < 6; i++)
+        for (int i = 1; i < 6; i++)
         {
+            int temp = i - 1;
             InviteButton *button = [InviteButton buttonWithType:UIButtonTypeCustom];
             
-            button.frame = CGRectMake(SCREEN_WIDTH/3*(i%3), lineImageView.bottom+11+(i/3)*(72+11)*autoSizeScaleY, SCREEN_WIDTH/3, 72*autoSizeScaleY);
+            button.frame = CGRectMake(SCREEN_WIDTH / 3 * (temp % 3), lineImageView.bottom + 11 + (temp / 3) * (72 + 11) * autoSizeScaleY, SCREEN_WIDTH/3, 72*autoSizeScaleY);
             [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"shareButton_%d", i]]
                     forState:UIControlStateNormal];
             [button setTitle:textArray[i] forState:UIControlStateNormal];

@@ -24,13 +24,18 @@
 
 //友盟
 #define UmengAppkey @"567b9cf067e58e0328001837"
-//微信
+//1-微信
 //#define WXAppId @"wx9544599ba9eeb641"
 //#define WXAppSecret @"bf2e624408c9f52a828e995c21d10be8"
 
-//update by lcw
-#define WXAppId @"wx2096c885e9decaa3"
-#define WXAppSecret @"d4624c36b6795d1d99dcf0547af5443d"
+//2-update by lcw
+//#define WXAppId @"wx2096c885e9decaa3"
+//#define WXAppSecret @"d4624c36b6795d1d99dcf0547af5443d"
+
+//3-update by lcw
+#define WXAppId @"wx63e868ae2813ecb8"
+#define WXAppSecret @"f14f97c84ccd0f93e2a91e0f1c35fac8"
+
 //高德地图
 #define GaoDeAppKey @"ec59da5fd6eeee28f486f6fda61438c4"
 //新浪微博
@@ -302,7 +307,7 @@
     NSDictionary *dict = [data objectFromJSONData];
     
     NSString *openId = dict[@"id"];
-    NSString *openIdString = [NSString stringWithFormat:@"%ld",[openId integerValue]];
+    NSString *openIdString = [NSString stringWithFormat:@"%ld",(long)[openId integerValue]];
     NSDictionary *loginInfo = @{@"thirdType":@"sina",
                                 @"openId":openIdString,
                                 @"screenName":dict[@"screen_name"],

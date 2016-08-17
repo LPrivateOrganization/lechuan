@@ -697,26 +697,25 @@ NSString *job;
     
     NSString *shareTypeString = self.infoDic[@"shareType"];
     
+    int temp = 3;//默认QQ空间
+    
     if ([shareTypeString isKindOfClass:[NSNull class]]) {
         
-        shareTypeString = @"1";
+        shareTypeString = [NSString stringWithFormat:@"%d",temp];
     }
     
-    int shareType = 1;//默认微信好友
+    int shareType = temp;//默认QQ空间
 
-    if ([shareTypeString isKindOfClass:[NSNumber class]]) {
+    if ([shareTypeString isKindOfClass:[NSNumber class]] ||
+        [shareTypeString isKindOfClass:[NSString class]]) {
         
         shareType = [shareTypeString intValue];
         
         if (shareType < 1 || shareType > 7) {
-            shareType = 1;//超出范围默认为1 微信好友
+            shareType = temp;//超出范围 默认temp
         }
-
     }
     
-    //test
-    
-    shareType = 5;
     
     [self shareActionType:shareType];
     
@@ -1222,6 +1221,18 @@ NSString *job;
 - (void)writeLabelAction
 {
     NSString *imei = [[NSUserDefaults standardUserDefaults] objectForKey:kUDUUID];
+    
+    if (!self.gender) {
+        self.gender = @"";
+    }
+    
+    if (!self.age) {
+        self.age = @"";
+    }
+    
+    if (!self.job) {
+        self.job = @"";
+    }
     
     [UMessage addTag:@[[FFConfig currentConfig].cityName,self.gender,self.age,self.job,imei]
             response:^(id responseObject, NSInteger remain, NSError *error)
